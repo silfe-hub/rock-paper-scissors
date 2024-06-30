@@ -67,6 +67,8 @@ console.log(convertHumanInput(humanChoice));
 let humanChoiceInt = convertHumanInput(humanChoice);
 let computerChoiceInt = convertComputerChoice(computerChoice);
 
+let humanScore = 0;
+let computerScore = 0;
 
 //Function to play game
 function playRound(humanChoiceInt, computerChoiceInt) {
@@ -80,11 +82,18 @@ function playRound(humanChoiceInt, computerChoiceInt) {
         (humanChoiceInt === 3 && computerChoiceInt === 1) // rock vs paper
     ) {
         roundResult = "The computer wins!";
+        computerScore += 1;
+        return computerScore;
     } else {
         roundResult = "Human wins!";
+        humanScore += 1;
+        return humanScore;
     }
+
+    console.log(roundResult);
         
     return roundResult;
 }
 
 console.log(playRound(humanChoiceInt, computerChoiceInt));
+console.log("Score is now: " + humanScore + " for Human and " + computerScore + " for Computer");
