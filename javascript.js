@@ -1,3 +1,4 @@
+
 // Function to get the computer's choice 
 function getComputerInput() {
     //Generate a random number between 1 and 3
@@ -14,7 +15,6 @@ function getComputerInput() {
 
 // Variable that stores the computer's choice
 let computerChoice = getComputerInput()
-console.log("Computer chose: " + computerChoice);
 
 //Convert computerChoice back to integer
 function convertComputerChoice(computerChoice) {
@@ -26,9 +26,6 @@ function convertComputerChoice(computerChoice) {
         return 3;
     }
 }
-
-console.log(convertComputerChoice(computerChoice));
-
 
 
 //Function to get human choice
@@ -46,7 +43,6 @@ function getHumanChoice() {
 }
 
 let humanChoice = getHumanChoice();
-console.log("Human chose: " + humanChoice);
 
 //Convert humanChoice to integer
 function convertHumanInput(humanChoice) {
@@ -62,15 +58,14 @@ function convertHumanInput(humanChoice) {
     }
 }
 
-console.log(convertHumanInput(humanChoice));
-
 let humanChoiceInt = convertHumanInput(humanChoice);
 let computerChoiceInt = convertComputerChoice(computerChoice);
 
+//Global variables for score tracking
 let humanScore = 0;
 let computerScore = 0;
 
-//Function to play game
+//Function to play one round
 function playRound(humanChoiceInt, computerChoiceInt) {
     let roundResult; 
 
@@ -95,5 +90,30 @@ function playRound(humanChoiceInt, computerChoiceInt) {
     return roundResult;
 }
 
-console.log(playRound(humanChoiceInt, computerChoiceInt));
-console.log("Score is now: " + humanScore + " for Human and " + computerScore + " for Computer");
+//Function to play a full game of five rounds
+function playGame() {
+    
+    while (humanScore < 5 && computerScore < 5) {
+        let humanChoice = getHumanChoice();
+        console.log("Human chose: " + humanChoice);
+        let humanChoiceInt = convertHumanInput(humanChoice);
+        
+        let computerChoice = getComputerInput();
+        console.log("Computer chose: " + computerChoice);
+        let computerChoiceInt = convertComputerChoice(computerChoice);
+
+        playRound(humanChoiceInt, computerChoiceInt);
+
+        console.log("Score is now: Human - " + humanScore + ", Computer - " + computerScore);
+        console.log("-------------------------");
+    } 
+
+    if (humanScore === 5) {
+        console.log("Congratulations, you won!");
+    } else {
+        console.log("Sorry, you lost! :(");
+    }
+}
+
+//Start the game
+playGame();
