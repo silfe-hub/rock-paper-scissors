@@ -36,7 +36,7 @@ console.log(convertComputerChoice(computerChoice));
 
 //Function for human choice
 function getHumanChoice() {
-    let humanInput = prompt("Choose rock, paper or scissors:", ""); 
+    let humanInput = prompt("Choose rock, paper or scissors:", "").toLowerCase(); 
     if (humanInput === "paper") {
         return "paper";
     } else if (humanInput === "scissors") {
