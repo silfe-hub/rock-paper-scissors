@@ -1,3 +1,4 @@
+// Function to get the computer's choice 
 function getComputerInput() {
     //Generate a random number between 1 and 3
     let computerInput = Math.floor(Math.random() * 3) + 1;  
@@ -6,35 +7,31 @@ function getComputerInput() {
         return "paper";
     } else if (computerInput === 2) {
         return "scissors";
-    } else if (computerInput === 3) {
+    } else {
         return "rock";
     }
 }
 
+// Variable that stores the computer's choice
 let computerChoice = getComputerInput()
-
 console.log("Computer chose: " + computerChoice);
 
 //Convert computerChoice back to integer
 function convertComputerChoice(computerChoice) {
-    let computerInputConverter;
-
     if (computerChoice === "paper") {
-        computerInputConverter = 1;
+        return 1;
     } else if (computerChoice === "scissors") {
-        computerInputConverter = 2;
+        return 2;
     } else {
-        computerInputConverter = 3;
+        return 3;
     }
-
-    return computerInputConverter;
 }
 
 console.log(convertComputerChoice(computerChoice));
 
 
 
-//Function for human choice
+//Function to get human choice
 function getHumanChoice() {
     let humanInput = prompt("Choose rock, paper or scissors:", "").toLowerCase(); 
     if (humanInput === "paper") {
@@ -49,27 +46,45 @@ function getHumanChoice() {
 }
 
 let humanChoice = getHumanChoice();
-
 console.log("Human chose: " + humanChoice);
 
 //Convert humanChoice to integer
 function convertHumanInput(humanChoice) {
-    let humanInputConverter;
     
     if (humanChoice === "paper") {
-        humanInputConverter = 1;
+        return 1;
     } else if (humanChoice === "scissors") {
-        humanInputConverter = 2;
+        return 2;
     } else if (humanChoice === "rock") {
-        humanInputConverter = 3;
+        return 3;
     } else {
         return "Invalid input";
     }
-
-    return humanInputConverter;
-
-    }
+}
 
 console.log(convertHumanInput(humanChoice));
 
+let humanChoiceInt = convertHumanInput(humanChoice);
+let computerChoiceInt = convertComputerChoice(computerChoice);
 
+
+//Function to play game
+function playRound(humanChoiceInt, computerChoiceInt) {
+    let roundResult; 
+
+    if (humanChoiceInt === computerChoiceInt) {
+        roundResult = "It's a tie!";
+    } else if (
+        (humanChoiceInt === 1 && computerChoiceInt === 2) || //paper vs scissors
+        (humanChoiceInt === 2 && computerChoiceInt === 3) || //scissors vs rock
+        (humanChoiceInt === 3 && computerChoiceInt === 1) // rock vs paper
+    ) {
+        roundResult = "The computer wins!";
+    } else {
+        roundResult = "Human wins!";
+    }
+        
+    return roundResult;
+}
+
+console.log(playRound(humanChoiceInt, computerChoiceInt));
