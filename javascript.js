@@ -1,4 +1,3 @@
-
 // Function to get the computer's choice 
 function getComputerInput() {
     //Generate a random number between 1 and 3
@@ -92,7 +91,6 @@ function playRound(humanChoiceInt, computerChoiceInt) {
 
 //Function to play a full game of five rounds
 function playGame() {
-    
     while (humanScore < 5 && computerScore < 5) {
         let humanChoice = getHumanChoice();
         console.log("Human chose: " + humanChoice);
@@ -102,8 +100,14 @@ function playGame() {
         console.log("Computer chose: " + computerChoice);
         let computerChoiceInt = convertComputerChoice(computerChoice);
 
-        playRound(humanChoiceInt, computerChoiceInt);
+        let result = playRound(humanChoiceInt, computerChoiceInt);
 
+        if (result === "Human wins!") {
+            humanScore += 1;
+        } else if (result === "The computer wins!") {
+            computerScore += 1;
+        }
+        
         console.log("Score is now: Human - " + humanScore + ", Computer - " + computerScore);
         console.log("-------------------------");
     } 
