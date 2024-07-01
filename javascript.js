@@ -45,7 +45,6 @@ let humanChoice = getHumanChoice();
 
 //Convert humanChoice to integer
 function convertHumanInput(humanChoice) {
-    
     if (humanChoice === "paper") {
         return 1;
     } else if (humanChoice === "scissors") {
@@ -53,7 +52,7 @@ function convertHumanInput(humanChoice) {
     } else if (humanChoice === "rock") {
         return 3;
     } else {
-        return "Invalid input";
+        return "Invalid input, try again";
     }
 }
 
@@ -83,39 +82,41 @@ function playRound(humanChoiceInt, computerChoiceInt) {
         humanScore += 1;
         return humanScore;
     }
-
-    console.log(roundResult);
-        
-    return roundResult;
 }
 
 //Function to play a full game of five rounds
 function playGame() {
     while (humanScore < 5 && computerScore < 5) {
-        let humanChoice = getHumanChoice();
+
+        // Plays the first roundt immediately
+        let initialResult = playRound(humanChoiceInt, computerChoiceInt);
         console.log("Human chose: " + humanChoice);
-        let humanChoiceInt = convertHumanInput(humanChoice);
-        
-        let computerChoice = getComputerInput();
         console.log("Computer chose: " + computerChoice);
-        let computerChoiceInt = convertComputerChoice(computerChoice);
-
-        let result = playRound(humanChoiceInt, computerChoiceInt);
-
-        if (result === "Human wins!") {
-            humanScore += 1;
-        } else if (result === "The computer wins!") {
-            computerScore += 1;
-        }
-        
+        console.log(initialResult);
         console.log("Score is now: Human - " + humanScore + ", Computer - " + computerScore);
         console.log("-------------------------");
-    } 
 
-    if (humanScore === 5) {
-        console.log("Congratulations, you won!");
-    } else {
-        console.log("Sorry, you lost! :(");
+        //Continue with the rest of the rounds
+        while (humanScore < 5 && computerScore < 5) {
+            let humanChoice = getHumanChoice();
+            console.log("Human Chose: " + humanChoice);
+            let humanChoiceInt = convertHumanInput(humanChoice);
+
+            let computerChoice = getComputerInput();
+            console.log("Computer chose: " + computerChoice);
+            let computerChoiceInt = convertComputerChoice(computerChoice);
+
+            let result = playRound(humanChoiceInt, computerChoiceInt);
+            console.log(result);
+            console.log("Score is now: Human - " + humanScore + ", Computer - " + computerScore);
+            console.log("-------------------------");
+        }
+       
+        if (humanScore === 5) {
+            console.log("Congratulations, you won!");
+        } else {
+            console.log("Sorry, you lost! :(");
+        }
     }
 }
 
